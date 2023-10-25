@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>FunWithNumbers</name>
+	<name>Groceries</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1697641420097</id>
+			<id>1697641420178</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
