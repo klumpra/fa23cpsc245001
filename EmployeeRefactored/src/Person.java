@@ -1,5 +1,5 @@
 
-public abstract class Person {
+public abstract class Person implements Comparable<Person> {
 	private String firstName;
 	private String lastName;
 	public Person() {
@@ -27,4 +27,11 @@ public abstract class Person {
     	return String.format("%s\t%s\t%s",getType(),firstName,lastName);
     }
     public abstract String getType();
+    
+    @Override
+    public int compareTo(Person other) {  // natural sort order is lastname + firstname
+        String myLastFirst = lastName+firstName;
+        String otherLastFirst = other.getLastName() + other.getFirstName();
+        return myLastFirst.compareTo(otherLastFirst);   // delegation
+    } 
 }
