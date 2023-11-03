@@ -13,8 +13,7 @@ public class PersonApp {
 		peeps.add(emp1);
 		peeps.add(cus1);
 		peeps.add(emp2);
-		for (Person p : peeps) {
-			System.out.println(p);
-		}
+		// PersonWriter writer = new PersonWriter();
+		//PersonWriter.printToScreen(peeps);
 	}
 }
