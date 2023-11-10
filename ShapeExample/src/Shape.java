@@ -1,4 +1,4 @@
-public abstract class Shape implements Comparable<Shape>{
+public abstract class Shape implements Comparable<Shape> {
     private Point origin;
     public String getType() {
         return "shape";
@@ -34,6 +34,9 @@ public abstract class Shape implements Comparable<Shape>{
     public String toString() {
         return String.format("%s\t%s",getType(),origin.toString()); // delegation
     }
+    public String toStringDetailed() {
+        return "Basics: " + toString() + "\tAdvanced: " + String.format("\tArea = %.2f, Perim = %.2f, Dist = %.2f",calculateArea(),calculatePerimeter(), getDistanceFromCartesianOrigin());
+    }
     public double getDistanceFromCartesianOrigin() {
         return origin.getDistanceFromCartesianOrigin();
     }
@@ -41,12 +44,12 @@ public abstract class Shape implements Comparable<Shape>{
      * natural sort order is based on distance from Cartesian origin
      */
     @Override
-    public int compareTo(Shape s) {
-        double myDistance = getDistanceFromCartesianOrigin();
-        double otherDistance = s.getDistanceFromCartesianOrigin();
-        if (myDistance < otherDistance) {
+    public int compareTo(Shape other) {
+        double myDist = getDistanceFromCartesianOrigin();
+        double otherDist = other.getDistanceFromCartesianOrigin();
+        if (myDist < otherDist) {
             return -1;
-        } else if (myDistance == otherDistance) {
+        } else if (myDist == otherDist) {
             return 0;
         } else {
             return 1;
