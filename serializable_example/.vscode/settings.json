@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\klump\\Dropbox\\2023Fall\\cpsc24500_private\\java_practice\\serializable_example\\json-simple-1.1.1.jar"
+    ]
+}
