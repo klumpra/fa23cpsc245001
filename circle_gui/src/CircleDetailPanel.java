@@ -49,4 +49,16 @@ public class CircleDetailPanel extends JPanel {
     public String getComment() {
         return tarComment.getText();
     }
+    public void clearEntries() {
+        txtX.setText("");
+        txtY.setText("");
+        txtRadius.setText("");
+        tarComment.setText("");
+    }
+    public void enableEntries(boolean enabledYN) {
+        txtX.setEnabled(enabledYN);
+        txtY.setEnabled(enabledYN);
+        txtRadius.setEnabled(enabledYN);
+        tarComment.setEnabled(enabledYN);
+    }
 }

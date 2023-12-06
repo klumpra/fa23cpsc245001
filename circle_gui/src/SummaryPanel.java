@@ -13,6 +13,7 @@ public class SummaryPanel extends JPanel {
         setLayout(new BorderLayout());
         add(new JLabel("Circle Summary"),BorderLayout.NORTH);
         tarSummary = new JTextArea(10,30);
+        tarSummary.setEditable(false);
         add(tarSummary,BorderLayout.CENTER);
     }
     public SummaryPanel(ArrayList<Circle> circles) {
