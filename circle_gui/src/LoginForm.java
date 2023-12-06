@@ -29,13 +29,21 @@ public class LoginForm extends JDialog {
         JButton btnOK = new JButton("OK");
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // ADD IN THE LOGIN HANDLER HERE
+                String enteredPassword = new String(txtPassword.getPassword());
+                if (enteredPassword.equals(password)) {
+                    loggedIn = true;
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null,"You entered an incorrect password.");
+                    loggedIn = false;
+                }
             }
         });
         JButton btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // ADD IN THE LOGIN CANCEL HANDLER HERE
+                loggedIn = false;
+                setVisible(false);
             }
         });
         panSouth.setLayout(new FlowLayout());
@@ -44,11 +52,13 @@ public class LoginForm extends JDialog {
         c.add(panSouth,BorderLayout.SOUTH);
     }
     public LoginForm(JFrame owner, String title, boolean modal) {
-        // FILL IN THE CONSTRUCTOR HERE
-        
+        super(owner,title,modal);
+        setupGUI();
+        password = "Pizza2023";
+        loggedIn = false;
     }
     public boolean isLoggedIn() {
-        // FILL IN THE TEST HERE
+        return loggedIn;
     }
     
 }

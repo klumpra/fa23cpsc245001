@@ -9,12 +9,17 @@ import java.util.ArrayList;
 public class SummaryPanel extends JPanel {
     private ArrayList<Circle> circles;
     private JTextArea tarSummary;
+    private JLabel lblSummary;
     public void setupGUI() {
         setLayout(new BorderLayout());
-        add(new JLabel("Circle Summary"),BorderLayout.NORTH);
+        lblSummary = new JLabel("Circle Summary");
+        add(lblSummary,BorderLayout.NORTH);
         tarSummary = new JTextArea(10,30);
         tarSummary.setEditable(false);
         add(tarSummary,BorderLayout.CENTER);
+    }
+    public void setSummaryLabel(String text) {
+        lblSummary.setText(text);
     }
     public SummaryPanel(ArrayList<Circle> circles) {
         this.circles = circles;

@@ -13,19 +13,25 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
 import java.io.*;
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener {
     private ArrayList<Circle> circles;
+    private JMenuItem miLogin;
+    private JMenuItem miLogout;
+    private CircleDetailPanel cdp;
+    private JButton btnAddCircle;
     public void setupMenu() {
         JMenuBar mbar = new JMenuBar();
         setJMenuBar(mbar);
         JMenu mnuFile = new JMenu("File");
         mbar.add(mnuFile);
-        JMenuItem miLogin = new JMenuItem("Log in");
-        JMenuItem miLogout = new JMenuItem("Log out");
+        miLogin = new JMenuItem("Log in");
+        miLogin.addActionListener(this);
+        miLogout = new JMenuItem("Log out");
         JMenuItem miSave = new JMenuItem("Save");
         JMenuItem miExit = new JMenuItem("Exit");
         mnuFile.add(miLogin);
         mnuFile.add(miLogout);
+        miLogout.addActionListener(this);
         mnuFile.add(miSave);
         miSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -63,15 +69,15 @@ public class MainFrame extends JFrame {
         setTitle("Circles");
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
-        CircleDetailPanel cdp = new CircleDetailPanel();
+        cdp = new CircleDetailPanel();
         SummaryPanel sumPan = new SummaryPanel(circles);
         c.add(cdp,BorderLayout.WEST);
         c.add(sumPan,BorderLayout.EAST);
         JPanel panSouth = new JPanel();
-        JButton btnAddCircle = new JButton("Add Circle");
+        btnAddCircle = new JButton("Add Circle");
         btnAddCircle.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                double x=0,y=0,radius=0;
+                double x=0,y=0,radius=0, totalArea;
                 ArrayList<String> errors = new ArrayList<String>();
                 try {
                     x = cdp.getXVal();
@@ -100,6 +106,8 @@ public class MainFrame extends JFrame {
                     circles.add(c);
                     sumPan.updateList();
                     cdp.clearEntries();
+                    totalArea = Circle.getTotalArea(circles);
+                    sumPan.setSummaryLabel(String.format("Total area = %.2f",totalArea));
                     repaint();    // refreshes the frame's appearance
                 }
             }
@@ -108,10 +116,29 @@ public class MainFrame extends JFrame {
         panSouth.add(btnAddCircle);
         c.add(panSouth,BorderLayout.SOUTH);
         setupMenu();
-        cdp.enableEntries(false); // disables all the entries at the start
+        enableEntries(false); // disables all the entries at the start
     }
     public MainFrame(ArrayList<Circle> circles) {
         this.circles = circles;
         setupGUI();
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        LoginForm dlgLogin;
+        if (e.getSource() == miLogin) {
+            dlgLogin = new LoginForm(this,"Log in",true);
+            dlgLogin.setVisible(true);
+            if (dlgLogin.isLoggedIn()) {
+                enableEntries(true);
+            } else {
+                enableEntries(false);
+            }
+        } else if (e.getSource() == miLogout) {
+            enableEntries(false);
+        }
+    }
+    public void enableEntries(boolean enableYN) {
+        cdp.enableEntries(enableYN);
+        btnAddCircle.setEnabled(enableYN);
     }
 }

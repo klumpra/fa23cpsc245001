@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Circle {
     private double radius;
     private double x;
@@ -46,5 +47,15 @@ public class Circle {
     @Override
     public String toString() {
         return String.format("rad=%.2f, x=%.2f, y=%.2f, c=%s",radius,x,y,comment);
+    }
+    public double calcArea() {
+        return Math.PI * radius * radius;
+    }
+    public static double getTotalArea(ArrayList<Circle> circles) {
+        double total = 0;
+        for (Circle c : circles) {
+            total = total + c.calcArea();
+        }
+        return total;
     }
 }
